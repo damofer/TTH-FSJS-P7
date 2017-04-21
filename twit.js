@@ -17,7 +17,11 @@ by the screen_name or user_id parameters
 https://dev.twitter.com/rest/reference/get/statuses/user_timeline
 */
 function getLatestTweets(profile) {
-    return profile.get('statuses/user_timeline', { screen_name: profile.screen_name, count: 5 });
+    return profile.get('statuses/user_timeline',
+     {
+     screen_name: profile.screen_name, 
+     count: 5
+      });
 }
 
 /*API Reference : Returns a cursored collection of user objects for every user the specified user 
@@ -26,7 +30,11 @@ At this time, results are ordered with the most recent following first
 https://dev.twitter.com/rest/reference/get/friends/list
 */
 function getRecentFriends(profile) {
-    return profile.get('friends/list', { screen_name: profile.screen_name , count: 5 });
+    return profile.get('friends/list', 
+    	{ 
+    	 screen_name: profile.screen_name ,
+    	 count: 5 
+    	});
 }
 
 /*API Reference :Returns the 20 most recent direct messages sent by the authenticating user. 
@@ -34,7 +42,10 @@ Includes detailed information about the sender and recipient user
 https://dev.twitter.com/rest/reference/get/direct_messages/sent
 */
 function getLatestMessages(profile) {
-    return profile.get('direct_messages/sent', { screen_name: profile.screen_name, count: 5 });
+    return profile.get('direct_messages/sent', 
+    	{ screen_name: profile.screen_name, 
+    	  count: 5 
+    	});
 }
 
 //Object literal module exports

@@ -13,20 +13,14 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', index);
 
 
-// catch 404 and forward to error handler
-/*app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});*/
+
+
 
 
 // Middleware - Twitter authentication
@@ -43,6 +37,7 @@ app.use(function(req, res, next) {
 	next();
 });
 
+//when pointing to the root, it will handle  the info that was on the req.
 app.get('/', function(req, res) {
 	
 	var latestTweets;
@@ -60,10 +55,7 @@ app.get('/', function(req, res) {
 	});
 
 	Promise.all([req.latestTweets,req.recentFriends,req.latestMessages]).then(function(){
-		// console.dir(user);
-		//console.dir(latestTweets);
-		// console.dir(recentFriends);
-		console.dir(latestMessages);
+		// send params to the view.
 		res.render(path.join(__dirname, 'views/index.pug'), { 
 															latestTweets:latestTweets,
 															recentFriends:recentFriends,
@@ -76,16 +68,8 @@ app.get('/', function(req, res) {
 
 });
 
-// error handler
-/*app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});*/
+
 app.listen(3000, function() {
 
 	console.log("The frontend server is running on port 3000!");
