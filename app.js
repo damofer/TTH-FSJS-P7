@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Middleware - Twitter authentication
 app.use(function(req, res, next) {
 	var user =  twit.getProfile(twitter_credentials);
-	req.user= user;
+	
 	req.latestTweets =twit.getLatestTweets(user);
 	req.recentFriends =twit.getRecentFriends(user);
 	req.latestMessages =twit.getLatestMessages(user);
@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function(req, res) {
-	var user = req.user;
+	
 	var latestTweets;
 	req.latestTweets.then(function(data){
 		latestTweets =data.data;
@@ -60,11 +60,11 @@ app.get('/', function(req, res) {
 	});
 
 	Promise.all([req.latestTweets,req.recentFriends,req.latestMessages]).then(function(){
-		console.dir(user);
-		// console.dir(latestTweets);
+		// console.dir(user);
+		//console.dir(latestTweets);
 		// console.dir(recentFriends);
-		// console.dir("latestMessages : " + latestMessages);
-		res.render(path.join(__dirname, 'views/index.pug'), { user:user,
+		console.dir(latestMessages);
+		res.render(path.join(__dirname, 'views/index.pug'), { 
 															latestTweets:latestTweets,
 															recentFriends:recentFriends,
 															latestMessages:latestMessages
